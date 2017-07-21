@@ -10,4 +10,5 @@ urlpatterns = [
 	url(r'^users/register$', views.register),
 	url(r'^quotes/add$', views.addquote),
 	url(r'^quotes/addfavorites/(?P<id>\d+)$', views.addfavorites),
+	url(r'^quotes/deletefavorites/(?P<id>\d+)$', views.deletefavorites),
 ]

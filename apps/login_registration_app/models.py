@@ -8,14 +8,16 @@ EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 class UserManager(models.Manager):
 	def validate(self, user_data):
 		errors = {}
-
-		for something in user_data:
-			if len(something) < 3:
-				errors['length'] = "Items can not be less than 3 characters"
+		if len(user_data['name']) < 3 or len(user_data['alias']) < 3:
+			errors['length'] = "Name can not be less than 3 characters"
 		if not EMAIL_REGEX.match(user_data['email']):
 			errors['email'] = "Invalid email"
+		if len(user_data['pass']) < 8:
+			errors['password'] = "Password must be at least 8 characters"
 		if user_data['pass'] != user_data['con_pass']:
 			errors['password'] = "Password does not match"
+		if len(user_data['bday']) < 10:
+			errors['bday'] = "Invalid birthday"
 
 		return errors
 		

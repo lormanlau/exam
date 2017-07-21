@@ -16,9 +16,10 @@ def register(request):
 	if request.method == "POST":
 		errors = Users.objects.validate(request.POST)
 		if errors:
-			for tags, error in errors:
+			for tags, error in errors.iteritems():
 				messages.error(request, error, extra_tags = tags)
 		else:
+			print request.POST['bday']
 			if len(Users.objects.filter(email = request.POST['email'])) > 0:
 				messages.error(request, "Email is already taken" , extra_tags = "email")
 			else:
@@ -50,7 +51,8 @@ def dashboard(request):
 		return redirect('/')
 	else:
 		context = {
-		'quotes': Quote.objects.all().order_by('-id')
+		'quotes': Quote.objects.all().exclude(favorites__user__id = request.session['user_id']).order_by('-id'),
+		'favorites': Favorites.objects.filter(user__id = request.session['user_id'])
 		}
 		return render(request, 'login_registration_app/dashboard.html', context)
 
@@ -78,5 +80,9 @@ def userinfo(request, id):
 	return render(request, 'login_registration_app/user_info.html', context)
 
 def addfavorites(request, id):
-	Favorites.objects.create(user = Users.objects.get(id = request.session.user_id), quote = Quote.objects.get(id = id))
+	Favorites.objects.create(user = Users.objects.get(id = request.session['user_id']), quote = Quote.objects.get(id = id))
+	return redirect('/quotes')
+
+def deletefavorites(request, id):
+	Favorites.objects.get(id = id).delete()
 	return redirect('/quotes')

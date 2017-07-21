@@ -27,15 +27,17 @@
 	<div class="column">
 		<div id="favorite" class="right">
 			<h3>Your Favorites</h3>
+			{% for quote in favorites %}
 			<div class="quote">
-				<p>SOMEQUOTES</p>
+				<p><span class="bold">{{quote.quote.author}}</span> {{quote.quote.text}} </p>
 				<div class="author_button">
-					<p>Posted by <a href="">SOMEAUTHOR</a></p>
-					<form>
+					<p>Posted by <a href="/users/{{quote.user.id}}">{{quote.quote.user.alias}}</a></p>
+					<form action='/quotes/deletefavorites/{{quote.id}}'>
 						<input type="submit" value="Remove From My List">
 					</form>
 				</div>
 			</div>
+			{% endfor %}
 		</div>
 		<div class="right">
 			<h3>Contribute a Quote:</h3>
