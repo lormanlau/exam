@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Quotes</title>
+	{%load static%}
+	<link rel="stylesheet" type="text/css" href="{% static 'login_registration_app/css/style_dashboard.css'%}">
+</head>
+<body>
+	<nav>
+		<a href="">Logout</a>
+	</nav>
+	<h1>Welcome, PLACEHOLDER FOR USERNAME</h1>
+	<div id="quote_container" class="column">
+		<h3>Quotable Quotes</h3>
+		<div class="quote">
+			<p>SOMEQUOTES</p>
+			<div class="author_button">
+				<p>Posted by <a href="">SOMEAUTHOR</a></p>
+				<form>
+					<input type="submit" value="Add to My List">
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="column">
+		<div id="favorite" class="right">
+			<h3>Your Favorites</h3>
+			<div class="quote">
+				<p>SOMEQUOTES</p>
+				<div class="author_button">
+					<p>Posted by <a href="">SOMEAUTHOR</a></p>
+					<form>
+						<input type="submit" value="Remove From My List">
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="right">
+			<h3>Contribute a Quote:</h3>
+			<form>
+				<p>Quoted By: <input type="text" name="name"></p>
+				<p>Message: <textarea name="text"></textarea></p>
+				<input type="submit" value="Submit">
+			</form>
+		</div>
+	</div>
+</body>
+</html>
