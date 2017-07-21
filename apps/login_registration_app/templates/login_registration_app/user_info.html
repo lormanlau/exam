@@ -10,12 +10,14 @@
 		<a href="/quotes">Dashboard</a> | 
 		<a href="">Logout</a>
 	</nav>
-	<h3>Posts by USERNAME</h3>
-	<h3>Count: NUMBER OF POSTS</h3>
+	<h3>Posts by {{user.alias}}</h3>
+	<h3>Count: {{numb_of_quotes}}</h3>
 	<div class="container">
-		<p><span class="red">AUTHOR NAME</span>
-		QUOTEPLACEHOLDE
+	{%for quote in quotes %}
+		<p><span class="red">{{quote.author}}:</span>
+		{{quote.text}}
 		</p>
+	{% endfor %}
 	</div>
 </body>
 </html>

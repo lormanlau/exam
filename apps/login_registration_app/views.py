@@ -48,19 +48,31 @@ def dashboard(request):
 	if request.session['user_id'] == 0:
 		messages.error(request, "You are not Logged In", extra_tags = 'Not Logged in')
 		return redirect('/')
-	return render(request, 'login_registration_app/dashboard.html')
+	else:
+		context = {
+		'quotes': Quote.objects.all().order_by('-id')
+		}
+		return render(request, 'login_registration_app/dashboard.html', context)
 
 def addquote(request):
 	if request.method == "POST":
+		errors = False
 		if len(request.POST['name']) < 3:
 			messages.error(request, "Author needs to be at least 3 letters long", extra_tags = 'author')
+			errors = True
 		if len(request.POST['text']) < 10:
 			messages.error(request, "Message needs to be at least 10 letters long", extra_tags = 'text')
+			errors = True
 
-		if not messages:
+		if errors == False:
 			Quote.objects.create(author = request.POST['name'], text = request.POST['text'], user = Users.objects.get(id = request.session['user_id']))
 
 	return redirect('/quotes')
 
 def userinfo(request, id):
-	return render(request, 'login_registration_app/user_info.html')
+	context = {
+	'quotes': Quote.objects.filter(user = Users.objects.get(id = id)),
+	'user': Users.objects.get(id = id),
+	'numb_of_quotes': len(Quote.objects.filter(user = Users.objects.get(id = id)))
+	}
+	return render(request, 'login_registration_app/user_info.html', context)

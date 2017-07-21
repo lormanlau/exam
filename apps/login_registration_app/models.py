@@ -35,3 +35,9 @@ class Quote(models.Model):
 	user = models.ForeignKey(Users, on_delete=models.CASCADE)
 	created_at = models.DateTimeField(auto_now_add = True)
 	updated_at = models.DateTimeField(auto_now = True)
+
+class Favorites(models.Model):
+	user = models.ForeignKey(Users)
+	quote = models.ForeignKey(Quote)
+	created_at = models.DateTimeField(auto_now_add = True)
+	updated_at = models.DateTimeField(auto_now = True)
