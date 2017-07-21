@@ -76,3 +76,7 @@ def userinfo(request, id):
 	'numb_of_quotes': len(Quote.objects.filter(user = Users.objects.get(id = id)))
 	}
 	return render(request, 'login_registration_app/user_info.html', context)
+
+def addfavorites(request, id):
+	Favorites.objects.create(user = Users.objects.get(id = request.session.user_id), quote = Quote.objects.get(id = id))
+	return redirect('/quotes')

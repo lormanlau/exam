@@ -9,5 +9,5 @@ urlpatterns = [
 	url(r'^users/login$', views.login),
 	url(r'^users/register$', views.register),
 	url(r'^quotes/add$', views.addquote),
-
+	url(r'^quotes/addfavorites/(?P<id>\d+)$', views.addfavorites),
 ]

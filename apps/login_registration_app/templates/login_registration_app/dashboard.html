@@ -17,7 +17,7 @@
 			<p><span class="bold">{{quote.author}}</span> {{quote.text}}</p>
 			<div class="author_button">
 				<p>Posted by <a href="/users/{{request.session.user_id}}">{{quote.user.alias}}</a></p>
-				<form>
+				<form action="/quotes/addfavorites/{{quote.id}}">
 					<input type="submit" value="Add to My List">
 				</form>
 			</div>
