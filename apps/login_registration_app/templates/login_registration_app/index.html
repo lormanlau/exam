@@ -8,7 +8,7 @@
 <body>
 <h1>Welcome!</h1>
 {%for message in messages%}
-	<h3 class="error">{{message}}</h3>
+	<h3 class="error {{messages.tags}}">{{message}}</h3>
 {%endfor%}
 <div>
 	<h3>Register</h3>

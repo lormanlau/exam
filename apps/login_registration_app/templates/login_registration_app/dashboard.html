@@ -7,9 +7,9 @@
 </head>
 <body>
 	<nav>
-		<a href="">Logout</a>
+		<a href="/users/logout">Logout</a>
 	</nav>
-	<h1>Welcome, PLACEHOLDER FOR USERNAME</h1>
+	<h1>Welcome, {{request.session.user_alias}}</h1>
 	<div id="quote_container" class="column">
 		<h3>Quotable Quotes</h3>
 		<div class="quote">
@@ -37,7 +37,11 @@
 		</div>
 		<div class="right">
 			<h3>Contribute a Quote:</h3>
-			<form>
+			{% for message in messages %}
+				<p class="red">{{message}}</p>
+			{% endfor %}
+			<form action='/quotes/add' method="POST">
+			{% csrf_token %}
 				<p>Quoted By: <input type="text" name="name"></p>
 				<p>Message: <textarea name="text"></textarea></p>
 				<input type="submit" value="Submit">
