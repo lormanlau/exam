@@ -8,8 +8,10 @@ import bcrypt
 
 # Create your views here.
 def index(request):
-	if request.session['user_id'] != 0:
-		return redirect('/quotes')
+	try:
+		request.session['user_id']
+	except:
+		request.session['user_id'] = 0
 	return render(request, 'login_registration_app/index.html')
 
 def register(request):
