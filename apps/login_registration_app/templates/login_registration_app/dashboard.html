@@ -16,7 +16,7 @@
 		<div class="quote">
 			<p><span class="bold">{{quote.author}}</span> {{quote.text}}</p>
 			<div class="author_button">
-				<p>Posted by <a href="/users/{{request.session.user_id}}">{{quote.user.alias}}</a></p>
+				<p>Posted by <a href="/users/{{quote.user.id}}">{{quote.user.alias}}</a></p>
 				<form action="/quotes/addfavorites/{{quote.id}}">
 					<input type="submit" value="Add to My List">
 				</form>
@@ -31,7 +31,7 @@
 			<div class="quote">
 				<p><span class="bold">{{quote.quote.author}}</span> {{quote.quote.text}} </p>
 				<div class="author_button">
-					<p>Posted by <a href="/users/{{quote.user.id}}">{{quote.quote.user.alias}}</a></p>
+					<p>Posted by <a href="/users/{{quote.quote.user.id}}">{{quote.quote.user.alias}}</a></p>
 					<form action='/quotes/deletefavorites/{{quote.id}}'>
 						<input type="submit" value="Remove From My List">
 					</form>
